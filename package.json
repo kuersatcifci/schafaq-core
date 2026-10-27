@@ -1,0 +1,24 @@
+{
+  "name": "schafaq-core",
+  "version": "1.0.0",
+  "description": "Schafaq-Kern: nachvollziehbare islamische Gebetszeiten aus Koordinaten und eigenen Parametern, mit vollständigem Rechenprotokoll.",
+  "license": "MIT",
+  "author": "Kürşat Çifçi",
+  "homepage": "https://schafaq.de",
+  "repository": { "type": "git", "url": "https://github.com/kuersatcifci/schafaq-core.git" },
+  "keywords": ["prayer times", "gebetszeiten", "salah", "islam", "astronomy", "fajr", "isha", "qibla", "esp32", "pixel"],
+  "type": "module",
+  "exports": {
+    ".": { "types": "./src/index.ts", "import": "./dist/schafaq.mjs" }
+  },
+  "bin": { "schafaq": "./dist/cli.mjs" },
+  "files": ["src", "dist", "README.md", "LICENSE", "CLAUDE.md"],
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=neutral --format=esm --outfile=dist/schafaq.mjs --log-level=warning && esbuild src/cli.ts --bundle --platform=node --format=esm --outfile=dist/cli.mjs --banner:js='#!/usr/bin/env node' --log-level=warning",
+    "test": "vitest run",
+    "check": "tsc --noEmit",
+    "verify": "npm run check && npm test && npm run build"
+  },
+  "dependencies": { "astronomy-engine": "^2.1.19" },
+  "devDependencies": { "esbuild": "^0.28.1", "typescript": "^6.0.3", "vitest": "^4.1.10", "@types/node": "^24.0.0" }
+}
